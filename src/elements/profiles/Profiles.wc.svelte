@@ -93,11 +93,13 @@
   let sshStatus: "read" | "write" = undefined;
   async function readSSH() {
     sshStatus = "read";
-    const grid = await getGrid({ networkEnv: process.env.NETWORK, mnemonics: mnemonics$.value } as any, _ => _);
-    const metadata = await grid.kvstore?.get({ key: "metadata" });
-    sshStatus = undefined;
-    if (metadata) {
-      return JSON.parse(metadata).sshkey;
+    if (mnemonics$.value.length > 0) {
+      const grid = await getGrid({ networkEnv: process.env.NETWORK, mnemonics: mnemonics$.value } as any, _ => _);
+      const metadata = await grid.kvstore?.get({ key: "metadata" });
+      sshStatus = undefined;
+      if (metadata) {
+        return JSON.parse(metadata).sshkey;
+      }
     }
   }
 
