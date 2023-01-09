@@ -9,7 +9,6 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.14.2-slim-chrome103-ff102
     strategy:
       matrix:
         node-version: [16.x]
